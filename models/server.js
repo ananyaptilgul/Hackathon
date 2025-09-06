@@ -3,21 +3,19 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
 
-// Import User model
+
 const User = require('./user');
 
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-// ------------ Middleware ------------
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve static frontend (your login.html in /public at project root)
+
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-// ------------ MongoDB Connection ------------
 mongoose.connect('mongodb://127.0.0.1:27017/ecofinds', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -25,9 +23,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/ecofinds', {
 .then(() => console.log('✅ MongoDB connected to ecofinds'))
 .catch(err => console.error('❌ MongoDB connection error:', err));
 
-// ------------ Authentication Routes ------------
 
-// Register route
 app.post('/api/register', async (req, res) => {
   try {
     const { email, password } = req.body || {};
@@ -48,7 +44,7 @@ app.post('/api/register', async (req, res) => {
   }
 });
 
-// Login route
+
 app.post('/api/login', async (req, res) => {
   try {
     const { email, password } = req.body || {};
@@ -70,19 +66,18 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-// ------------ Config for Frontend ------------
+
 app.get('/config.js', (_req, res) => {
   res.type('application/javascript').send(
     `window.BASE_URL = "${process.env.BASE_URL || `http://localhost:${PORT}`}";`
   );
 });
 
-// ------------ Fallback for SPA/HTML ------------
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'login.html'));
 });
 
-// ------------ Start Server ------------
+
 app.listen(PORT, () => {
   console.log(`🚀 Auth server running on http://localhost:${PORT}`);
 });
