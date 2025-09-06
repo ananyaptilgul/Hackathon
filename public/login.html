@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ecofinds - Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="/css/style.css"/>
+  <style>
+    /* Your existing CSS here (omitted for brevity) */
+    /* Basic reset and fonts */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(135deg, #224c38 0%, #2c6c4a 100%);
+  font-family: 'Inter', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Container for entire auth form */
+.auth-container {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  max-width: 400px;
+  width: 100%;
+  padding: 24px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Header */
+.auth-header {
+  text-align: center;
+  margin-bottom: 8px;
+}
+.auth-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.auth-subtitle {
+  font-size: 1rem;
+  color: #5e6c65;
+  margin-bottom: 12px;
+}
+
+/* Tabs container */
+.tabs {
+  display: flex;
+  width: 100%;
+  gap: 8px;
+}
+.tab-btn {
+  flex-grow: 1;
+  padding: 10px 0;
+  border: 1.5px solid #22a163;
+  border-radius: 8px;
+  background: transparent;
+  color: #22a163;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.tab-btn.active {
+  background-color: #22a163;
+  color: #fff;
+}
+
+/* Panels */
+.tab-panels {
+  width: 100%;
+}
+.panel {
+  display: none;
+  margin-top: 16px;
+}
+.panel.active {
+  display: block;
+}
+
+/* Forms */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+input[type="email"],
+input[type="password"] {
+  padding: 10px 14px;
+  border: 1.5px solid #22a163;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border-color: #158046;
+}
+
+/* Buttons */
+.btn {
+  background-color: #22a163;
+  color: #fff;
+  padding: 12px 0;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.btn:hover {
+  background-color: #158046;
+}
+
+/* Links */
+.alt-link, .footer {
+  text-align: center;
+  font-size: 0.95rem;
+  margin-top: 8px;
+}
+.alt-link a, .footer a {
+  color: #22a163;
+  font-weight: 600;
+  text-decoration: none;
+}
+.alt-link a:hover, .footer a:hover {
+  text-decoration: underline;
+}
+
+/* Message styling */
+#authMessage {
+  min-height: 24px;
+  text-align: center;
+  font-size: 1rem;
+  color: #e81c4f;
+}
+
+/* Footer */
+.footer {
+  margin-top: 12px;
+  color: #5e6c65;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .auth-container {
+    margin: 24px 12px;
+    padding: 20px 16px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="auth-container">
+    <div class="auth-header">
+      <div class="auth-title">Welcome to ecofinds</div>
+      <div class="auth-subtitle">Secure access to your farming tools</div>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Authentication tabs">
+      <button class="tab-btn active" data-tab="login" role="tab" aria-selected="true">Login</button>
+      <button class="tab-btn" data-tab="register" role="tab" aria-selected="false">Register</button>
+    </div>
+    <div id="authMessage" role="status"></div>
+    <div class="tab-panels">
+      <!-- LOGIN PANEL -->
+      <section id="panel-login" class="panel active login-card" aria-labelledby="login-tab">
+        <form id="loginForm" autocomplete="on">
+          <h3>Login to Your Account</h3>
+          <input type="email" id="loginEmail" name="email" placeholder="Email Address" required autocomplete="username" />
+          <input type="password" id="loginPassword" name="password" placeholder="Password" required autocomplete="current-password" />
+          <button type="submit" class="btn">Login</button>
+        </form>
+        <p class="alt-link">New to EcoFinds <a href="#" id="toRegister">Create an account</a></p>
+      </section>
+      <!-- REGISTER PANEL -->
+      <section id="panel-register" class="panel register-card" aria-labelledby="register-tab">
+        <form id="registerForm" autocomplete="on">
+          <h3>Create Your Account</h3>
+          <input type="email" id="registerEmail" name="email" placeholder="Email Address" required autocomplete="username" />
+          <input type="password" id="registerPassword" name="password" placeholder="Password (min 6 characters)" required autocomplete="new-password" minlength="6" />
+          <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required autocomplete="new-password" minlength="6" />
+          <button type="submit" class="btn">Create Account</button>
+        </form>
+        <p class="alt-link">Already have an account? <a href="#" id="toLogin">Sign in here</a></p>
+      </section>
+    </div>
+    <div class="footer">
+      © <span id="year"></span> 2025 EcoFinds. All rights reserved.
+    </div>
+  </div>
+  <script src="/config.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.panel');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetTab = btn.dataset.tab;
+        tabBtns.forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        panels.forEach(panel => panel.classList.remove('active'));
+        document.getElementById(`panel-${targetTab}`).classList.add('active');
+      });
+    });
+
+    document.getElementById('toRegister')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.querySelector('[data-tab="register"]').click();
+    });
+    document.getElementById('toLogin')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.querySelector('[data-tab="login"]').click();
+    });
+
+    const API_BASE_URL = window.BASE_URL || 'http://localhost:4000';
+
+    function showMessage(text, type = 'success') {
+      const messageEl = document.getElementById('authMessage');
+      messageEl.textContent = text;
+      messageEl.className = type;
+      setTimeout(() => {
+        messageEl.style.display = 'none';
+        messageEl.className = '';
+      }, 5000);
+    }
+
+    document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value.trim();
+      if (!email || !password) {
+        showMessage('Please fill in all fields', 'error');
+        return;
+      }
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || 'Login failed');
+        showMessage('✅ Login successful! Redirecting...', 'success');
+        // Store logged-in user info in localStorage
+        localStorage.setItem('currentUser', JSON.stringify(data.user));
+        setTimeout(() => {
+          window.location.href = '/ecommerce.html';  // Adjust this to your next page
+        }, 1500);
+      } catch (error) {
+        showMessage(`❌ Login failed: ${error.message}`, 'error');
+      }
+    });
+
+    document.getElementById('registerForm')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('registerEmail').value.trim();
+      const password = document.getElementById('registerPassword').value.trim();
+      const confirmPassword = document.getElementById('confirmPassword').value.trim();
+      if (!email || !password || !confirmPassword) {
+        showMessage('Please fill in all fields', 'error');
+        return;
+      }
+      if (password !== confirmPassword) {
+        showMessage('Passwords do not match', 'error');
+        return;
+      }
+      if (password.length < 6) {
+        showMessage('Password must be at least 6 characters long', 'error');
+        return;
+      }
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/register`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || 'Registration failed');
+        showMessage('✅ Registration successful! Redirecting...', 'success');
+        document.getElementById('registerForm').reset();
+        // You may optionally store user info here as well or redirect to login
+        setTimeout(() => {
+          window.location.href = '/ecommerce.html'; // Or redirect to login page if preferred
+        }, 1500);
+      } catch (error) {
+        showMessage(`❌ Registration failed: ${error.message}`, 'error');
+      }
+    });
+  </script>
+</body>
+</html>
