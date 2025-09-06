@@ -1,12 +1,11 @@
-// Login & Signup app.js
+
 (function() {
   'use strict';
 
-  // Base URL
   window.BASE_URL = window.BASE_URL || 'http://localhost:3000';
   const API_BASE_URL = window.BASE_URL;
 
-  // Helpers
+ 
   function el(sel, root = document) { return root.querySelector(sel); }
 
   function showMessage(text, type = 'success') {
@@ -28,7 +27,7 @@
     box._hideTO = setTimeout(() => { box.style.display = 'none'; }, 3500);
   }
 
-  // API call
+ 
   async function apiCall(endpoint, options = {}) {
     const url = endpoint.startsWith('http') ? endpoint : `${API_BASE_URL}${endpoint}`;
     const response = await fetch(url, {
@@ -40,7 +39,7 @@
     return data;
   }
 
-  // Auth
+ 
   async function registerUser(email, password) {
     return await apiCall('/api/register', {
       method: 'POST',
@@ -55,7 +54,6 @@
     });
   }
 
-  // Session
   function setCurrentUser(email) {
     sessionStorage.setItem('farmfusion_user', JSON.stringify({ email, time: Date.now() }));
   }
@@ -64,7 +62,7 @@
     sessionStorage.removeItem('farmfusion_user');
   }
 
-  // Form handlers
+  
   function setupForms() {
     const loginForm = el('#loginForm');
     if (loginForm) {
@@ -111,7 +109,7 @@
     }
   }
 
-  // Init
+ 
   document.addEventListener('DOMContentLoaded', () => {
     console.log('Auth App.js loaded with BASE_URL:', API_BASE_URL);
     setupForms();
